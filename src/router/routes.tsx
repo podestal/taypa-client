@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import CartaPage from "../pages/landing/CartaPage";
 import MainPage from "../pages/landing/MainPage";
+import Chicken from "../components/landing/carta/Chicken";
 
 const routes = createBrowserRouter([
     {
@@ -11,6 +12,10 @@ const routes = createBrowserRouter([
             {
                 path: "carta",
                 element: <CartaPage />,
+            },
+            {
+                path: "chicken",
+                element: <Chicken />
             }
         ]
     }
