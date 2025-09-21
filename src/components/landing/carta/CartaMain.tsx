@@ -1,4 +1,4 @@
-import { Beef, Drumstick, Sandwich } from 'lucide-react';
+import { Beef, Drumstick, Sandwich, Dessert } from 'lucide-react';
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { useNavigate } from 'react-router-dom';
@@ -12,6 +12,7 @@ interface Props {
     size?: number;
     onClick?: () => void;
     isSelected?: boolean;
+    label?: string;
 }
 
 const FloatingElement = ({ 
@@ -22,12 +23,15 @@ const FloatingElement = ({
   hoverColor = "hover:text-orange-500",
   size = 80,
   onClick,
-  isSelected = false
+  isSelected = false,
+  label
 }: Props) => {
   const elementRef = useRef<HTMLDivElement>(null);
+  const labelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const element = elementRef.current;
+    const labelElement = labelRef.current;
     if (!element) return;
 
     if (isSelected) {
@@ -59,19 +63,25 @@ const FloatingElement = ({
         y: 50
       });
 
+      gsap.set(labelElement, {
+        opacity: 0,
+        scale: 0.5,
+        y: 20
+      });
+
       // Animate in - much faster now
       gsap.to(element, {
-        opacity: 0.3,
+        opacity: 0.7,
         scale: 1,
         rotation: 0,
         y: 0,
-        duration: 0.6, // Reduced from 1.2
-        delay: delay + 1.5, // Start after text animations complete
+        duration: 0.4,
+        delay: delay + 1.2,
         ease: "back.out(1.7)",
         onComplete: () => {
           // Start floating animation after entrance
           gsap.to(element, {
-            y: -20,
+            y: -15,
             rotation: 5,
             duration: 3,
             ease: "sine.inOut",
@@ -80,19 +90,45 @@ const FloatingElement = ({
           });
         }
       });
+
+      // Animate label in
+      gsap.to(labelElement, {
+        opacity: 1,
+        scale: 1,
+        y: 0,
+        duration: 0.3,
+        delay: delay + 1.5,
+        ease: "back.out(1.7)"
+      });
     }
   }, [delay, isSelected]);
 
   return (
     <div 
       ref={elementRef}
-      className={`absolute transition-all duration-500 cursor-pointer ${className}`}
+      className={`absolute transition-all duration-300 cursor-pointer group ${className}`}
       onClick={onClick}
     >
-      <Icon 
-        size={size} 
-        className={`${color} ${hoverColor} transition-colors duration-300 drop-shadow-lg`} 
-      />
+      <div className="relative">
+        <Icon 
+          size={size} 
+          className={`${color} ${hoverColor} transition-all duration-300 drop-shadow-lg group-hover:scale-105 group-hover:rotate-6`} 
+        />
+        {/* Subtle glow effect */}
+        <div className={`absolute inset-0 ${color.replace('text-', 'bg-')} opacity-30 blur-lg -z-10 group-hover:opacity-50 transition-opacity duration-300`}></div>
+      </div>
+      
+      {/* Label */}
+      {label && (
+        <div 
+          ref={labelRef}
+          className="absolute -bottom-6 sm:-bottom-8 left-1/2 transform -translate-x-1/2 whitespace-nowrap"
+        >
+          <div className="bg-gray-800/90 backdrop-blur-sm text-white px-3 py-1 rounded-full text-xs sm:text-sm font-medium shadow-md border border-gray-700">
+            {label}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
@@ -167,19 +203,17 @@ const ModernFoodHero = () => {
       }
     );
 
-    // Title animation
+    // Title animation - simpler
     tl.fromTo(titleRef.current,
       {
         opacity: 0,
-        y: 100,
-        scale: 0.8
+        y: 50
       },
       {
         opacity: 1,
         y: 0,
-        scale: 1,
-        duration: 1.2,
-        ease: "back.out(1.7)"
+        duration: 1,
+        ease: "power2.out"
       },
       "-=0.5"
     );
@@ -188,7 +222,7 @@ const ModernFoodHero = () => {
     tl.fromTo(subtitleRef.current,
       {
         opacity: 0,
-        y: 50
+        y: 30
       },
       {
         opacity: 1,
@@ -199,85 +233,74 @@ const ModernFoodHero = () => {
       "-=0.3"
     );
 
-    // Background gradient animation
-    tl.fromTo(".bg-gradient",
-      {
-        opacity: 0,
-        scale: 1.1
-      },
-      {
-        opacity: 0.3,
-        scale: 1,
-        duration: 1.5,
-        ease: "power2.out"
-      },
-      "-=1"
-    );
-
   }, []);
 
   return (
-    <div ref={heroRef} className="relative min-h-screen bg-white overflow-hidden flex items-center justify-center">
-      {/* Floating Food Elements with vibrant colors */}
+    <div ref={heroRef} className="relative min-h-screen bg-gray-900 overflow-hidden flex items-center justify-center">
+      {/* Floating Food Elements - minimal dark theme */}
       <FloatingElement 
         icon={Sandwich} 
         className="floating-element top-20 left-16" 
         delay={0}
-        color="text-yellow-400"
-        hoverColor="hover:text-yellow-300"
-        size={90}
+        color="text-orange-400"
+        hoverColor="hover:text-orange-300"
+        size={70}
         onClick={() => handleElementClick('sandwich')}
+        label="Las Burgers"
       />
       <FloatingElement 
         icon={Drumstick} 
         className="floating-element top-32 right-20" 
-        delay={0.2}
-        color="text-red-500"
-        hoverColor="hover:text-red-400"
-        size={75}
+        delay={0.1}
+        color="text-red-400"
+        hoverColor="hover:text-red-300"
+        size={65}
         onClick={() => handleElementClick('drumstick')}
+        label="Los Pollos"
       />
       <FloatingElement 
         icon={Beef} 
         className="floating-element bottom-60 left-24" 
-        delay={0.4}
-        color="text-orange-500"
-        hoverColor="hover:text-orange-400"
-        size={85}
+        delay={0.2}
+        color="text-yellow-400"
+        hoverColor="hover:text-yellow-300"
+        size={70}
         onClick={() => handleElementClick('beef')}
+        label="Salchipapas"
       />
       
       {/* Additional smaller floating elements */}
       <FloatingElement 
-        icon={Drumstick} 
+        icon={Dessert} 
         className="floating-element bottom-22 right-1/4" 
-        delay={0.6}
-        color="text-pink-400"
-        hoverColor="hover:text-pink-300"
-        size={60}
+        delay={0.3}
+        color="text-green-400"
+        hoverColor="hover:text-green-300"
+        size={55}
         onClick={() => handleElementClick('drumstick')}
+        label="Postres"
       />
 
-      {/* Hero Content */}
-      <div className="text-center z-10 px-8 max-w-4xl mx-auto">
+      {/* Hero Content - clean and minimal dark */}
+      <div className="text-center z-10 px-8 max-w-4xl mx-auto ">
         <h1 
           ref={titleRef}
-          className="text-7xl md:text-8xl lg:text-9xl font-black text-gray-900 mb-6 leading-none font-limelight"
+          className="text-7xl md:text-8xl lg:text-9xl font-black text-white mb-6 leading-none font-limelight"
         >
           NUESTRA
-          <span className="block text-orange-500">CARTA</span>
+          <span className="block text-orange-400 drop-shadow-2xl">CARTA</span>
         </h1>
         
         <p 
           ref={subtitleRef}
-          className="text-xl md:text-2xl text-gray-600 font-light mb-8 max-w-2xl mx-auto leading-relaxed"
+          className="text-xl md:text-2xl text-gray-300 font-light mb-8 max-w-2xl mx-auto leading-relaxed"
         >
           Te lo mereces
         </p>
       </div>
 
-      {/* Subtle background decoration */}
-      <div className="bg-gradient absolute inset-0 bg-gradient-to-br from-gray-50 via-white to-orange-50 -z-10"></div>
+      {/* Simple dark background */}
+      <div className="bg-gradient absolute inset-0 bg-gradient-to-br from-gray-900 to-gray-800 -z-10"></div>
     </div>
   );
 };
