@@ -55,11 +55,11 @@ const Chicken = () => {
       "-=0.5"
     );
 
-    // Image slides in from left with rotation
+    // Image slides in from left with rotation - NO DELAY
     tl.fromTo(imageRef.current,
       {
         opacity: 0,
-        x: -200,
+        x: -100,
         rotation: -15,
         scale: 0.8
       },
@@ -68,10 +68,10 @@ const Chicken = () => {
         x: 0,
         rotation: 0,
         scale: 1,
-        duration: 1.2,
-        ease: "back.out(1.7)"
+        duration: 0.4,
+        ease: "back.out(2)"
       },
-      "-=0.8"
+      "-=0.5" // Same timing as title - shows up together
     );
 
     // Options slide in from right
@@ -86,7 +86,7 @@ const Chicken = () => {
         duration: 1,
         ease: "power2.out"
       },
-      "-=0.6"
+      "-=0.5" // Same timing as title and image - shows up together
     );
 
   }, []);
