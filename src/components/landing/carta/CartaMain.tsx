@@ -181,6 +181,9 @@ const ModernFoodHero = () => {
     tl.call(() => {
       if (elementType === 'drumstick') {
         navigate('/chicken');
+      } 
+      if (elementType === 'sandwich') {
+        navigate('/burger');
       }
       // Add more navigation cases for other elements
     });
