@@ -26,6 +26,10 @@ const ScrollRouter = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const lastScrollTime = useRef(0);
   const scrollTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const touchStartY = useRef(0);
+  const touchEndY = useRef(0);
+
+  console.log(currentRoute);
 
   const routes = [
     { path: '/carta', component: CartaMain },
@@ -34,9 +38,6 @@ const ScrollRouter = () => {
     { path: '/salchipapas', component: Salchipapas },
     { path: '/dessert', component: Dessert },
   ];
-  
-  console.log(currentRoute);
-  
 
   const currentPath = location.pathname;
   const currentIndex = routes.findIndex(route => route.path === currentPath);
@@ -78,13 +79,49 @@ const ScrollRouter = () => {
       }
     };
 
+    // Touch events for mobile
+    const handleTouchStart = (e: TouchEvent) => {
+      touchStartY.current = e.touches[0].clientY;
+    };
+
+    const handleTouchEnd = (e: TouchEvent) => {
+      touchEndY.current = e.changedTouches[0].clientY;
+      handleTouchMove();
+    };
+
+    const handleTouchMove = () => {
+      if (isTransitioning) return;
+      
+      const touchDiff = touchStartY.current - touchEndY.current;
+      const minSwipeDistance = 50; // Minimum distance for swipe
+      
+      if (Math.abs(touchDiff) > minSwipeDistance) {
+        const now = Date.now();
+        if (now - lastScrollTime.current < 500) return;
+        
+        lastScrollTime.current = now;
+        
+        if (touchDiff > 0) {
+          // Swipe up - scroll down
+          handleScrollDown();
+        } else {
+          // Swipe down - scroll up
+          handleScrollUp();
+        }
+      }
+    };
+
     // Add event listeners
     window.addEventListener('wheel', handleWheel, { passive: false });
     window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('touchstart', handleTouchStart, { passive: true });
+    window.addEventListener('touchend', handleTouchEnd, { passive: true });
 
     return () => {
       window.removeEventListener('wheel', handleWheel);
       window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('touchstart', handleTouchStart);
+      window.removeEventListener('touchend', handleTouchEnd);
       if (scrollTimeout.current) {
         clearTimeout(scrollTimeout.current);
       }
@@ -151,7 +188,8 @@ const ScrollRouter = () => {
         style={{ 
           position: 'relative',
           height: '100vh',
-          width: '100vw'
+          width: '100vw',
+          touchAction: 'pan-y' // Allow vertical scrolling
         }}
       >
         <CurrentComponent />
@@ -168,6 +206,13 @@ const ScrollRouter = () => {
               }`}
             />
           ))}
+        </div>
+        
+        {/* Mobile swipe hint */}
+        <div className="md:hidden fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50 pointer-events-none">
+          <div className="bg-black/20 backdrop-blur-sm text-white px-3 py-1 rounded-full text-xs">
+            Swipe ↑↓
+          </div>
         </div>
         
         {/* Scroll hint - only show on desktop */}

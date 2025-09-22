@@ -171,7 +171,7 @@ const Chicken = () => {
           </h1>
         </div>
 
-        <div className="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-2 sm:gap-4 md:gap-6 lg:gap-8 items-start overflow-y-auto scrollable-content">
+        <div className="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-2 sm:gap-4 md:gap-6 lg:gap-8 items-start">
           {/* Image Section - Top on mobile, Left on desktop */}
           <div className="flex flex-col items-center order-1 lg:order-1">
             <div className="relative w-full max-w-xs sm:max-w-sm md:max-w-md">
@@ -195,15 +195,15 @@ const Chicken = () => {
           </div>
 
           {/* Options Section - Bottom on mobile, Right on desktop */}
-          <div ref={optionsRef} className="space-y-1 sm:space-y-2 md:space-y-3 order-2 lg:order-2">
-            <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-white mb-2 sm:mb-4 md:mb-6 text-center">Elige tu tamaño</h2>
+          <div ref={optionsRef} className="space-y-0.5 order-2 lg:order-2">
+            <h2 className="text-xs sm:text-sm font-bold text-white mb-1 text-center">Elige tu tamaño</h2>
             
             {sizeOptions.map((option, index) => (
               <div
                 key={option.id}
-                className={`size-option bg-white/20 backdrop-blur-sm rounded-md sm:rounded-lg md:rounded-xl p-2 sm:p-3 md:p-4 hover:bg-white/30 transition-all duration-300 cursor-pointer border-2 ${
+                className={`size-option bg-white/20 backdrop-blur-sm rounded-sm p-1 hover:bg-white/30 transition-all duration-300 cursor-pointer border-2 ${
                   selectedSize === option.id 
-                    ? 'border-white bg-white/30 scale-105' 
+                    ? 'border-white bg-white/30' 
                     : 'border-transparent hover:border-white/50'
                 }`}
                 onClick={() => handleSizeSelect(option.id)}
@@ -213,10 +213,10 @@ const Chicken = () => {
               >
                 <div className="flex justify-between items-center">
                   <div className="flex-1">
-                    <h3 className="text-sm sm:text-base md:text-lg font-bold text-white mb-1">{option.name}</h3>
+                    <h3 className="text-xs font-bold text-white">{option.name}</h3>
                   </div>
-                  <div className="text-right ml-2 sm:ml-3">
-                    <span className="text-sm sm:text-base md:text-lg font-bold text-white">{option.price}</span>
+                  <div className="text-right ml-1">
+                    <span className="text-xs font-bold text-white">{option.price}</span>
                   </div>
                 </div>
               </div>

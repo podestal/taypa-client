@@ -245,35 +245,35 @@ const ModernFoodHero = () => {
   }, []);
 
   return (
-    <div ref={heroRef} className="relative min-h-screen bg-gray-900 overflow-hidden flex items-center justify-center">
+    <div ref={heroRef} className="relative h-screen bg-gray-900 overflow-hidden flex items-center justify-center">
       {/* Floating Food Elements - minimal dark theme */}
       <FloatingElement 
         icon={Sandwich} 
-        className="floating-element top-20 left-16" 
+        className="floating-element top-12 left-8 sm:top-16 sm:left-12" 
         delay={0}
         color="text-orange-400"
         hoverColor="hover:text-orange-300"
-        size={70}
+        size={50}
         onClick={() => handleElementClick('sandwich')}
         label="Las Burgers"
       />
       <FloatingElement 
         icon={Drumstick} 
-        className="floating-element top-32 right-20" 
+        className="floating-element top-20 right-12 sm:top-24 sm:right-16" 
         delay={0.1}
         color="text-red-400"
         hoverColor="hover:text-red-300"
-        size={65}
+        size={45}
         onClick={() => handleElementClick('drumstick')}
         label="Los Pollos"
       />
       <FloatingElement 
         icon={Beef} 
-        className="floating-element bottom-60 left-24" 
+        className="floating-element bottom-32 left-16 sm:bottom-40 sm:left-20" 
         delay={0.2}
         color="text-yellow-400"
         hoverColor="hover:text-yellow-300"
-        size={70}
+        size={50}
         onClick={() => handleElementClick('beef')}
         label="Salchipapas"
       />
@@ -281,20 +281,20 @@ const ModernFoodHero = () => {
       {/* Additional smaller floating elements */}
       <FloatingElement 
         icon={Dessert} 
-        className="floating-element bottom-22 right-1/4" 
+        className="floating-element bottom-16 right-1/4 sm:bottom-20 sm:right-1/3" 
         delay={0.3}
-        color="text-green-400"
-        hoverColor="hover:text-green-300"
-        size={55}
+        color="text-blue-400"
+        hoverColor="hover:text-blue-300"
+        size={40}
         onClick={() => handleElementClick('dessert')}
         label="Postres"
       />
 
       {/* Hero Content - clean and minimal dark */}
-      <div className="text-center z-10 px-8 max-w-4xl mx-auto ">
+      <div className="text-center z-10 px-4 sm:px-6 md:px-8 max-w-4xl mx-auto">
         <h1 
           ref={titleRef}
-          className="text-7xl md:text-8xl lg:text-9xl font-black text-white mb-6 leading-none font-limelight"
+          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-white mb-3 sm:mb-4 md:mb-6 leading-none font-limelight"
         >
           NUESTRA
           <span className="block text-orange-400 drop-shadow-2xl">CARTA</span>
@@ -302,7 +302,7 @@ const ModernFoodHero = () => {
         
         <p 
           ref={subtitleRef}
-          className="text-xl md:text-2xl text-gray-300 font-light mb-8 max-w-2xl mx-auto leading-relaxed"
+          className="text-lg sm:text-xl md:text-2xl text-gray-300 font-light mb-4 sm:mb-6 md:mb-8 max-w-2xl mx-auto leading-relaxed"
         >
           Te lo mereces
         </p>

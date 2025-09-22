@@ -219,13 +219,13 @@ const Salchipapas = () => {
           </div>
 
           {/* Options Section - Bottom on mobile, Right on desktop */}
-          <div ref={optionsRef} className="space-y-1 sm:space-y-1 md:space-y-2 order-2 lg:order-2">
-            <h2 className="text-sm sm:text-base md:text-lg font-bold text-white mb-1 sm:mb-2 md:mb-3 text-center">Elige tu salchipapa</h2>
+          <div ref={optionsRef} className="space-y-0.5 order-2 lg:order-2">
+            <h2 className="text-xs sm:text-sm font-bold text-white mb-1 text-center">Elige tu salchipapa</h2>
             
             {salchipapasTypes.map((option, index) => (
               <div
                 key={option.id}
-                className={`salchipapa-option bg-white/20 backdrop-blur-sm rounded-sm sm:rounded-md md:rounded-lg p-1 sm:p-2 md:p-3 hover:bg-white/30 transition-all duration-300 cursor-pointer border-2 ${
+                className={`salchipapa-option bg-white/20 backdrop-blur-sm rounded-sm p-1 hover:bg-white/30 transition-all duration-300 cursor-pointer border-2 ${
                   selectedType === option.id 
                     ? 'border-white bg-white/30' 
                     : 'border-transparent hover:border-white/50'
@@ -237,10 +237,10 @@ const Salchipapas = () => {
               >
                 <div className="flex justify-between items-center">
                   <div className="flex-1">
-                    <h3 className="text-xs sm:text-sm md:text-base font-bold text-white">{option.name}</h3>
+                    <h3 className="text-xs font-bold text-white">{option.name}</h3>
                   </div>
-                  <div className="text-right ml-1 sm:ml-2">
-                    <span className="text-xs sm:text-sm md:text-base font-bold text-white">{option.price}</span>
+                  <div className="text-right ml-1">
+                    <span className="text-xs font-bold text-white">{option.price}</span>
                   </div>
                 </div>
               </div>
