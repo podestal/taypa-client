@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { useNavigate } from 'react-router-dom';
 import clasic from '../../../assets/imgs/landing/burger-clasic.png'
+import royal from '../../../assets/imgs/landing/burger-royal.png'
+// import parrillera from '../../../assets/imgs/landing/burger-chorizo.png'
 
 const Burger = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -22,16 +24,16 @@ const Burger = () => {
     },
     { 
       id: 'queso', 
-      name: 'Con Queso', 
+      name: 'Royal', 
       price: '$11.99', 
-      description: 'Nuestra clásica con queso cheddar derretido, perfecta para los amantes del queso.', 
-      image: clasic 
+      description: 'Nuestra clásica hamburguesa, con tocino, queso y huevo frito perfecta para los amantes del breakfast.', 
+      image: royal 
     },
     { 
       id: 'bacon', 
-      name: 'Bacon', 
+      name: 'Parrillera', 
       price: '$13.99', 
-      description: 'Deliciosa hamburguesa con crujiente tocino, queso y todos los ingredientes frescos.', 
+      description: 'Deliciosa hamburguesa con carne de res, chorizo parrillero y nuestro chimichurri especial.', 
       image: clasic 
     },
     { 
