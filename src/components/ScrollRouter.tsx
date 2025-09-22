@@ -25,7 +25,7 @@ const ScrollRouter = () => {
   const [isTransitioning, setIsTransitioning] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const lastScrollTime = useRef(0);
-  const scrollTimeout = useRef<NodeJS.Timeout | null>(null);
+  const scrollTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const routes = [
     { path: '/carta', component: CartaMain },

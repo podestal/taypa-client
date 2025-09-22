@@ -185,6 +185,12 @@ const ModernFoodHero = () => {
       if (elementType === 'sandwich') {
         navigateToRoute(1); // Burger is index 1
       }
+      if (elementType === 'beef') {
+        navigateToRoute(3); // Salchipapas is index 3
+      }
+      if (elementType === 'dessert') {
+        navigateToRoute(4); // Dessert is index 4
+      }
       // Add more navigation cases for other elements
     });
   };
@@ -280,7 +286,7 @@ const ModernFoodHero = () => {
         color="text-green-400"
         hoverColor="hover:text-green-300"
         size={55}
-        onClick={() => handleElementClick('drumstick')}
+        onClick={() => handleElementClick('dessert')}
         label="Postres"
       />
 
