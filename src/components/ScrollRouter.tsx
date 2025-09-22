@@ -4,6 +4,8 @@ import { gsap } from 'gsap';
 import CartaMain from './landing/carta/CartaMain';
 import Burger from './landing/carta/Burger';
 import Chicken from './landing/carta/Chicken';
+import Salchipapas from './landing/carta/Salchipapas';
+import Dessert from './landing/carta/Dessert';
 
 // Create context for navigation
 const NavigationContext = createContext<{
@@ -29,6 +31,8 @@ const ScrollRouter = () => {
     { path: '/carta', component: CartaMain },
     { path: '/burger', component: Burger },
     { path: '/chicken', component: Chicken },
+    { path: '/salchipapas', component: Salchipapas },
+    { path: '/dessert', component: Dessert },
   ];
 
   console.log(currentRoute);
