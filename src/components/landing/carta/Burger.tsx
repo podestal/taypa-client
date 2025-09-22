@@ -1,9 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
-import { useNavigate } from 'react-router-dom';
 import clasic from '../../../assets/imgs/landing/burger-clasic.png'
 import royal from '../../../assets/imgs/landing/burger-royal.png'
-// import parrillera from '../../../assets/imgs/landing/burger-chorizo.png'
+import { useNavigation } from '../../ScrollRouter';
 
 const Burger = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -11,8 +10,8 @@ const Burger = () => {
   const imageRef = useRef<HTMLImageElement>(null);
   const optionsRef = useRef<HTMLDivElement>(null);
   const descriptionRef = useRef<HTMLDivElement>(null);
-  const navigate = useNavigate();
   const [selectedType, setSelectedType] = useState<string | null>('clasica');
+  const { navigateToRoute } = useNavigation();
 
   const burgerTypes = [
     { 
@@ -175,7 +174,7 @@ const Burger = () => {
     
     // Navigate back after animation
     tl.call(() => {
-      navigate('/carta');
+      navigateToRoute(0); // Go back to CartaMain (index 0)
     });
   };
 

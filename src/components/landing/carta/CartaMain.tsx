@@ -1,7 +1,7 @@
 import { Beef, Drumstick, Sandwich, Dessert } from 'lucide-react';
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
-import { useNavigate } from 'react-router-dom';
+import { useNavigation } from '../../ScrollRouter';
 
 interface Props {
     icon: React.ElementType;
@@ -137,7 +137,7 @@ const ModernFoodHero = () => {
   const heroRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const subtitleRef = useRef<HTMLParagraphElement>(null);
-  const navigate = useNavigate();
+  const { navigateToRoute } = useNavigation();
 
   const handleElementClick = (elementType: string) => {
     // Animate everything disappearing with different directions
@@ -180,10 +180,10 @@ const ModernFoodHero = () => {
     // Navigate after animations complete
     tl.call(() => {
       if (elementType === 'drumstick') {
-        navigate('/chicken');
+        navigateToRoute(2); // Chicken is index 2
       } 
       if (elementType === 'sandwich') {
-        navigate('/burger');
+        navigateToRoute(1); // Burger is index 1
       }
       // Add more navigation cases for other elements
     });

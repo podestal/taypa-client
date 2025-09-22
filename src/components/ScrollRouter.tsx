@@ -1,0 +1,189 @@
+import { useEffect, useState, useRef, createContext, useContext } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { gsap } from 'gsap';
+import CartaMain from './landing/carta/CartaMain';
+import Burger from './landing/carta/Burger';
+import Chicken from './landing/carta/Chicken';
+
+// Create context for navigation
+const NavigationContext = createContext<{
+  navigateToRoute: (index: number) => void;
+  currentIndex: number;
+}>({
+  navigateToRoute: () => {},
+  currentIndex: 0
+});
+
+export const useNavigation = () => useContext(NavigationContext);
+
+const ScrollRouter = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [currentRoute, setCurrentRoute] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const lastScrollTime = useRef(0);
+  const scrollTimeout = useRef<NodeJS.Timeout | null>(null);
+
+  const routes = [
+    { path: '/carta', component: CartaMain },
+    { path: '/burger', component: Burger },
+    { path: '/chicken', component: Chicken },
+  ];
+
+  console.log(currentRoute);
+
+  const currentPath = location.pathname;
+  const currentIndex = routes.findIndex(route => route.path === currentPath);
+
+  useEffect(() => {
+    const handleWheel = (e: WheelEvent) => {
+      e.preventDefault();
+      
+      const now = Date.now();
+      if (now - lastScrollTime.current < 500 || isTransitioning) return;
+      
+      lastScrollTime.current = now;
+      
+      if (scrollTimeout.current) {
+        clearTimeout(scrollTimeout.current);
+      }
+      
+      scrollTimeout.current = setTimeout(() => {
+        if (e.deltaY > 0) {
+          // Scrolling down
+          handleScrollDown();
+        } else {
+          // Scrolling up
+          handleScrollUp();
+        }
+      }, 100);
+    };
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (isTransitioning) return;
+      
+      if (e.key === 'ArrowDown' || e.key === 'PageDown') {
+        e.preventDefault();
+        handleScrollDown();
+      } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+        e.preventDefault();
+        handleScrollUp();
+      }
+    };
+
+    // Add event listeners
+    window.addEventListener('wheel', handleWheel, { passive: false });
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('wheel', handleWheel);
+      window.removeEventListener('keydown', handleKeyDown);
+      if (scrollTimeout.current) {
+        clearTimeout(scrollTimeout.current);
+      }
+    };
+  }, [isTransitioning, currentIndex]);
+
+  const handleScrollDown = () => {
+    if (currentIndex < routes.length - 1 && !isTransitioning) {
+      const nextIndex = currentIndex + 1;
+      navigateToRoute(nextIndex);
+    }
+  };
+
+  const handleScrollUp = () => {
+    if (currentIndex > 0 && !isTransitioning) {
+      const prevIndex = currentIndex - 1;
+      navigateToRoute(prevIndex);
+    }
+  };
+
+  const navigateToRoute = (index: number) => {
+    if (isTransitioning) return;
+    
+    setIsTransitioning(true);
+    const targetRoute = routes[index];
+    
+    // Animate out current component
+    const tl = gsap.timeline();
+    
+    tl.to(containerRef.current, {
+      opacity: 0,
+      scale: 0.95,
+      duration: 0.5,
+      ease: "power2.in"
+    });
+    
+    // Navigate after animation
+    tl.call(() => {
+      navigate(targetRoute.path);
+      setCurrentRoute(index);
+    });
+    
+    // Animate in new component
+    tl.to(containerRef.current, {
+      opacity: 1,
+      scale: 1,
+      duration: 0.5,
+      ease: "power2.out"
+    });
+    
+    // Reset transition state
+    tl.call(() => {
+      setIsTransitioning(false);
+    });
+  };
+
+  const CurrentComponent = routes[currentIndex]?.component || CartaMain;
+
+  return (
+    <NavigationContext.Provider value={{ navigateToRoute, currentIndex }}>
+      <div 
+        ref={containerRef}
+        className="w-full h-screen overflow-hidden"
+        style={{ 
+          position: 'relative',
+          height: '100vh',
+          width: '100vw'
+        }}
+      >
+        <CurrentComponent />
+        
+        {/* Scroll indicators */}
+        <div className="fixed right-6 top-1/2 transform -translate-y-1/2 z-50 space-y-2">
+          {routes.map((route, index) => (
+            <div
+              key={route.path}
+              className={`w-3 h-3 rounded-full transition-all duration-300 cursor-pointer ${
+                index === currentIndex 
+                  ? 'bg-white scale-125' 
+                  : 'bg-white/30 hover:bg-white/60'
+              }`}
+              onClick={() => navigateToRoute(index)}
+            />
+          ))}
+        </div>
+        
+        {/* Scroll hint */}
+        {currentIndex < routes.length - 1 && (
+          <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-50 animate-bounce">
+            <div className="bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm">
+              Scroll down ↓
+            </div>
+          </div>
+        )}
+        
+        {currentIndex > 0 && (
+          <div className="fixed top-8 left-1/2 transform -translate-x-1/2 z-50 animate-bounce">
+            <div className="bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm">
+              Scroll up ↑
+            </div>
+          </div>
+        )}
+      </div>
+    </NavigationContext.Provider>
+  );
+};
+
+export default ScrollRouter; 

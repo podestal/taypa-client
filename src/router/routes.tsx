@@ -3,6 +3,7 @@ import CartaPage from "../pages/landing/CartaPage";
 import MainPage from "../pages/landing/MainPage";
 import Chicken from "../components/landing/carta/Chicken";
 import Burger from "../components/landing/carta/Burger";
+import ScrollRouter from '../components/ScrollRouter';
 
 const routes = createBrowserRouter([
     {
@@ -12,15 +13,15 @@ const routes = createBrowserRouter([
         children: [
             {
                 path: "carta",
-                element: <CartaPage />,
+                element: <ScrollRouter />,
             },
             {
                 path: "chicken",
-                element: <Chicken />
+                element: <ScrollRouter />
             },
             {
                 path: "burger",
-                element: <Burger />
+                element: <ScrollRouter />
             }
         ]
     }

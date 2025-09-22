@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
-import { useNavigate } from 'react-router-dom';
 import threePieces from '../../../assets/imgs/landing/chicken-three.png'
+import { useNavigation } from '../../ScrollRouter';
 
 const Chicken = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -9,8 +9,8 @@ const Chicken = () => {
   const imageRef = useRef<HTMLImageElement>(null);
   const optionsRef = useRef<HTMLDivElement>(null);
   const descriptionRef = useRef<HTMLDivElement>(null);
-  const navigate = useNavigate();
   const [selectedSize, setSelectedSize] = useState<string | null>('personal');
+  const { navigateToRoute } = useNavigation();
 
   const sizeOptions = [
     { id: 'personal', name: 'Personal', price: '$8.99', description: 'Perfecto para una persona. Tiernos trozos de pollo con tu elección de acompañamiento.', image: threePieces },
@@ -149,7 +149,7 @@ const Chicken = () => {
     
     // Navigate back after animation
     tl.call(() => {
-      navigate('/carta');
+      navigateToRoute(0); // Go back to CartaMain (index 0)
     });
   };
 
