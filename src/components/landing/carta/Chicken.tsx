@@ -156,22 +156,22 @@ const Chicken = () => {
   const selectedOption = sizeOptions.find(option => option.id === selectedSize);
 
   return (
-    <div ref={containerRef} className="min-h-screen bg-gradient-to-br from-yellow-400 via-yellow-500 to-yellow-600 flex items-center justify-center p-4 sm:p-6 md:p-8">
+    <div ref={containerRef} className="h-screen bg-gradient-to-br from-yellow-400 via-yellow-500 to-yellow-600 flex items-center justify-center p-2 sm:p-4 md:p-6 lg:p-8 overflow-hidden">
       <div className="max-w-7xl mx-auto w-full h-full flex flex-col">
         <button 
           onClick={handleBackClick}
-          className="absolute z-50 top-4 left-4 sm:top-8 sm:left-8 bg-white/20 backdrop-blur-sm text-white px-4 py-2 sm:px-6 sm:py-3 rounded-full hover:bg-white/30 transition-all duration-300 font-semibold text-sm sm:text-base"
+          className="absolute z-50 top-2 left-2 sm:top-4 sm:left-4 bg-white/20 backdrop-blur-sm text-white px-3 py-1 sm:px-4 sm:py-2 rounded-full hover:bg-white/30 transition-all duration-300 font-semibold text-xs sm:text-sm"
         >
           ←
         </button>
         
-        <div className="text-center mb-4 sm:mb-6 md:mb-8">
-          <h1 ref={titleRef} className="text-3xl sm:text-4xl md:text-6xl lg:text-8xl xl:text-9xl font-black text-white mb-2 sm:mb-4 font-limelight drop-shadow-2xl">
+        <div className="text-center mb-2 sm:mb-4 md:mb-6">
+          <h1 ref={titleRef} className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl xl:text-8xl font-black text-white mb-1 sm:mb-2 font-limelight drop-shadow-2xl">
             LOS POLLOS
           </h1>
         </div>
 
-        <div className="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 md:gap-8 lg:gap-12 items-start">
+        <div className="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-2 sm:gap-4 md:gap-6 lg:gap-8 items-start overflow-y-auto scrollable-content">
           {/* Image Section - Top on mobile, Left on desktop */}
           <div className="flex flex-col items-center order-1 lg:order-1">
             <div className="relative w-full max-w-xs sm:max-w-sm md:max-w-md">
@@ -187,21 +187,21 @@ const Chicken = () => {
             
             {/* Description below image */}
             {selectedSize && (
-              <div ref={descriptionRef} className="mt-4 sm:mt-6 md:mt-8 text-center max-w-xs sm:max-w-sm md:max-w-md">
-                <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-white mb-2">{selectedOption?.name}</h3>
-                <p className="text-white/90 text-sm sm:text-base md:text-lg leading-relaxed">{selectedOption?.description}</p>
+              <div ref={descriptionRef} className="mt-2 sm:mt-4 md:mt-6 text-center max-w-xs sm:max-w-sm md:max-w-md">
+                <h3 className="text-sm sm:text-base md:text-lg font-bold text-white mb-1">{selectedOption?.name}</h3>
+                <p className="text-white/90 text-xs sm:text-sm md:text-base leading-relaxed">{selectedOption?.description}</p>
               </div>
             )}
           </div>
 
           {/* Options Section - Bottom on mobile, Right on desktop */}
-          <div ref={optionsRef} className="space-y-2 sm:space-y-3 md:space-y-4 order-2 lg:order-2">
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-4 sm:mb-6 md:mb-8 text-center">Elige tu tamaño</h2>
+          <div ref={optionsRef} className="space-y-1 sm:space-y-2 md:space-y-3 order-2 lg:order-2">
+            <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-white mb-2 sm:mb-4 md:mb-6 text-center">Elige tu tamaño</h2>
             
             {sizeOptions.map((option, index) => (
               <div
                 key={option.id}
-                className={`size-option bg-white/20 backdrop-blur-sm rounded-lg sm:rounded-xl md:rounded-2xl p-3 sm:p-4 md:p-6 hover:bg-white/30 transition-all duration-300 cursor-pointer border-2 ${
+                className={`size-option bg-white/20 backdrop-blur-sm rounded-md sm:rounded-lg md:rounded-xl p-2 sm:p-3 md:p-4 hover:bg-white/30 transition-all duration-300 cursor-pointer border-2 ${
                   selectedSize === option.id 
                     ? 'border-white bg-white/30 scale-105' 
                     : 'border-transparent hover:border-white/50'
@@ -213,10 +213,10 @@ const Chicken = () => {
               >
                 <div className="flex justify-between items-center">
                   <div className="flex-1">
-                    <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-white mb-1 sm:mb-2">{option.name}</h3>
+                    <h3 className="text-sm sm:text-base md:text-lg font-bold text-white mb-1">{option.name}</h3>
                   </div>
-                  <div className="text-right ml-3 sm:ml-4">
-                    <span className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-white">{option.price}</span>
+                  <div className="text-right ml-2 sm:ml-3">
+                    <span className="text-sm sm:text-base md:text-lg font-bold text-white">{option.price}</span>
                   </div>
                 </div>
               </div>

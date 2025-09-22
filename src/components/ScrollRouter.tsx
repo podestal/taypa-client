@@ -34,18 +34,20 @@ const ScrollRouter = () => {
     { path: '/salchipapas', component: Salchipapas },
     { path: '/dessert', component: Dessert },
   ];
-
+  
   console.log(currentRoute);
+  
 
   const currentPath = location.pathname;
   const currentIndex = routes.findIndex(route => route.path === currentPath);
 
   useEffect(() => {
     const handleWheel = (e: WheelEvent) => {
+      // Only prevent default for scroll navigation, not for internal scrolling
       e.preventDefault();
       
       const now = Date.now();
-      if (now - lastScrollTime.current < 500 || isTransitioning) return;
+      if (now - lastScrollTime.current < 300 || isTransitioning) return;
       
       lastScrollTime.current = now;
       
@@ -61,7 +63,7 @@ const ScrollRouter = () => {
           // Scrolling up
           handleScrollUp();
         }
-      }, 100);
+      }, 50);
     };
 
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -145,7 +147,7 @@ const ScrollRouter = () => {
     <NavigationContext.Provider value={{ navigateToRoute, currentIndex }}>
       <div 
         ref={containerRef}
-        className="w-full h-screen overflow-hidden"
+        className="w-full h-screen"
         style={{ 
           position: 'relative',
           height: '100vh',
@@ -155,23 +157,22 @@ const ScrollRouter = () => {
         <CurrentComponent />
         
         {/* Scroll indicators */}
-        <div className="fixed right-6 top-1/2 transform -translate-y-1/2 z-50 space-y-2">
+        <div className="fixed right-4 top-1/2 transform -translate-y-1/2 z-50 space-y-2 pointer-events-none">
           {routes.map((route, index) => (
             <div
               key={route.path}
-              className={`w-3 h-3 rounded-full transition-all duration-300 cursor-pointer ${
+              className={`w-2 h-2 rounded-full transition-all duration-300 ${
                 index === currentIndex 
                   ? 'bg-white scale-125' 
-                  : 'bg-white/30 hover:bg-white/60'
+                  : 'bg-white/30'
               }`}
-              onClick={() => navigateToRoute(index)}
             />
           ))}
         </div>
         
-        {/* Scroll hint */}
+        {/* Scroll hint - only show on desktop */}
         {currentIndex < routes.length - 1 && (
-          <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-50 animate-bounce">
+          <div className="hidden md:block fixed bottom-8 left-1/2 transform -translate-x-1/2 z-50 animate-bounce pointer-events-none">
             <div className="bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm">
               Scroll down ↓
             </div>
@@ -179,7 +180,7 @@ const ScrollRouter = () => {
         )}
         
         {currentIndex > 0 && (
-          <div className="fixed top-8 left-1/2 transform -translate-x-1/2 z-50 animate-bounce">
+          <div className="hidden md:block fixed top-8 left-1/2 transform -translate-x-1/2 z-50 animate-bounce pointer-events-none">
             <div className="bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm">
               Scroll up ↑
             </div>
