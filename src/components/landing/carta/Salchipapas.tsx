@@ -180,25 +180,25 @@ const Salchipapas = () => {
   const selectedOption = salchipapasTypes.find(option => option.id === selectedType);
 
   return (
-    <div ref={containerRef} className="h-screen bg-gradient-to-br from-green-400 via-green-500 to-green-600 flex items-center justify-center p-1 sm:p-2 md:p-4 lg:p-6 overflow-hidden">
+    <div ref={containerRef} className="h-screen bg-gradient-to-br from-green-400 via-green-500 to-green-600 flex items-center justify-center p-1 sm:p-2 md:p-4 overflow-hidden">
       <div className="max-w-7xl mx-auto w-full h-full flex flex-col">
         <button 
           onClick={handleBackClick}
-          className="absolute z-50 top-1 left-1 sm:top-2 sm:left-2 bg-white/20 backdrop-blur-sm text-white px-2 py-1 sm:px-3 sm:py-1 rounded-full hover:bg-white/30 transition-all duration-300 font-semibold text-xs"
+          className="absolute z-50 top-1 left-1 sm:top-2 sm:left-2 bg-white/20 backdrop-blur-sm text-white px-2 py-1 rounded-full hover:bg-white/30 transition-all duration-300 font-semibold text-xs"
         >
           ←
         </button>
         
-        <div className="text-center mb-1 sm:mb-2 md:mb-4">
-          <h1 ref={titleRef} className="text-xl sm:text-2xl md:text-3xl lg:text-5xl xl:text-7xl font-black text-white mb-1 font-limelight drop-shadow-2xl">
+        <div className="text-center mb-1 sm:mb-2">
+          <h1 ref={titleRef} className="text-lg sm:text-xl md:text-2xl lg:text-4xl xl:text-6xl font-black text-white mb-1 font-limelight drop-shadow-2xl">
             SALCHIPAPAS
           </h1>
         </div>
 
-        <div className="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-1 sm:gap-2 md:gap-4 lg:gap-6 items-start overflow-y-auto scrollable-content">
+        <div className="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-1 sm:gap-2 md:gap-4 items-center">
           {/* Image Section - Top on mobile, Left on desktop */}
           <div className="flex flex-col items-center order-1 lg:order-1">
-            <div className="relative w-full max-w-[200px] sm:max-w-xs md:max-w-sm">
+            <div className="relative w-full max-w-[150px] sm:max-w-[180px] md:max-w-[220px]">
               <img 
                 ref={imageRef}
                 src={selectedOption?.image || threePieces} 
@@ -211,9 +211,9 @@ const Salchipapas = () => {
             
             {/* Description below image */}
             {selectedType && (
-              <div ref={descriptionRef} className="mt-1 sm:mt-2 md:mt-4 text-center max-w-[200px] sm:max-w-xs md:max-w-sm">
-                <h3 className="text-xs sm:text-sm md:text-base font-bold text-white mb-1">{selectedOption?.name}</h3>
-                <p className="text-white/90 text-xs sm:text-sm leading-relaxed">{selectedOption?.description}</p>
+              <div ref={descriptionRef} className="mt-1 sm:mt-2 text-center max-w-[150px] sm:max-w-[180px] md:max-w-[220px]">
+                <h3 className="text-xs sm:text-sm font-bold text-white mb-1">{selectedOption?.name}</h3>
+                <p className="text-white/90 text-xs leading-tight">{selectedOption?.description}</p>
               </div>
             )}
           </div>

@@ -180,67 +180,62 @@ const Dessert = () => {
   const selectedOption = dessertTypes.find(option => option.id === selectedType);
 
   return (
-    <div ref={containerRef} className="h-screen bg-gradient-to-br from-blue-400 via-blue-500 to-blue-600 flex items-center justify-center p-2 sm:p-4 md:p-6 lg:p-8 overflow-hidden">
+    <div ref={containerRef} className="h-screen bg-gradient-to-br from-blue-400 via-blue-500 to-blue-600 flex items-center justify-center p-1 sm:p-2 md:p-4 overflow-hidden">
       <div className="max-w-7xl mx-auto w-full h-full flex flex-col">
         <button 
           onClick={handleBackClick}
-          className="absolute z-50 top-2 left-2 sm:top-4 sm:left-4 bg-white/20 backdrop-blur-sm text-white px-3 py-1 sm:px-4 sm:py-2 rounded-full hover:bg-white/30 transition-all duration-300 font-semibold text-xs sm:text-sm"
+          className="absolute z-50 top-1 left-1 sm:top-2 sm:left-2 bg-white/20 backdrop-blur-sm text-white px-2 py-1 rounded-full hover:bg-white/30 transition-all duration-300 font-semibold text-xs"
         >
           ←
         </button>
         
-        <div className="text-center mb-2 sm:mb-4 md:mb-6">
-          <h1 ref={titleRef} className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl xl:text-8xl font-black text-white mb-1 sm:mb-2 font-limelight drop-shadow-2xl">
+        <div className="text-center mb-2 sm:mb-4">
+          <h1 ref={titleRef} className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white mb-1 sm:mb-2 font-limelight drop-shadow-2xl">
             POSTRES
           </h1>
         </div>
 
-        <div className="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-2 sm:gap-4 md:gap-6 lg:gap-8 items-start">
-          {/* Image Section - Top on mobile, Left on desktop */}
-          <div className="flex flex-col items-center order-1 lg:order-1">
+        <div className="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-1 sm:gap-2 md:gap-4 items-center h-full">
+          {/* Image Section */}
+          <div className="flex flex-col items-center order-2 lg:order-1">
             <div className="relative w-full max-w-xs sm:max-w-sm md:max-w-md">
               <img 
                 ref={imageRef}
                 src={selectedOption?.image || threePieces} 
-                alt="postres" 
+                alt="dessert" 
                 className="w-full drop-shadow-2xl hover:scale-105 transition-transform duration-300" 
               />
-              {/* Glow effect */}
               <div className="absolute inset-0 bg-blue-300/20 rounded-full blur-xl -z-10"></div>
             </div>
             
-            {/* Description below image */}
             {selectedType && (
-              <div ref={descriptionRef} className="mt-2 sm:mt-4 md:mt-6 text-center max-w-xs sm:max-w-sm md:max-w-md">
-                <h3 className="text-sm sm:text-base md:text-lg font-bold text-white mb-1">{selectedOption?.name}</h3>
-                <p className="text-white/90 text-xs sm:text-sm md:text-base leading-relaxed">{selectedOption?.description}</p>
+              <div ref={descriptionRef} className="mt-2 sm:mt-4 text-center max-w-xs sm:max-w-sm md:max-w-md">
+                <h3 className="text-sm sm:text-base font-bold text-white mb-1">{selectedOption?.name}</h3>
+                <p className="text-white/90 text-xs sm:text-sm leading-relaxed">{selectedOption?.description}</p>
               </div>
             )}
           </div>
 
-          {/* Options Section - Bottom on mobile, Right on desktop */}
-          <div ref={optionsRef} className="space-y-0.5 order-2 lg:order-2">
+          {/* Options Section */}
+          <div ref={optionsRef} className="space-y-0.5 order-1 lg:order-2">
             <h2 className="text-xs sm:text-sm font-bold text-white mb-1 text-center">Elige tu postre</h2>
             
-            {dessertTypes.map((option, index) => (
+            {dessertTypes.map((option) => (
               <div
                 key={option.id}
-                className={`dessert-option bg-white/20 backdrop-blur-sm rounded-sm p-1 hover:bg-white/30 transition-all duration-300 cursor-pointer border-2 ${
+                className={`size-option bg-white/20 backdrop-blur-sm rounded-sm p-1 hover:bg-white/30 transition-all duration-300 cursor-pointer border ${
                   selectedType === option.id 
                     ? 'border-white bg-white/30' 
                     : 'border-transparent hover:border-white/50'
                 }`}
                 onClick={() => handleTypeSelect(option.id)}
-                style={{
-                  animationDelay: `${index * 0.1}s`
-                }}
               >
                 <div className="flex justify-between items-center">
                   <div className="flex-1">
-                    <h3 className="text-xs font-bold text-white">{option.name}</h3>
+                    <h3 className="text-xs sm:text-sm font-bold text-white">{option.name}</h3>
                   </div>
-                  <div className="text-right ml-1">
-                    <span className="text-xs font-bold text-white">{option.price}</span>
+                  <div className="text-right ml-2">
+                    <span className="text-xs sm:text-sm font-bold text-white">{option.price}</span>
                   </div>
                 </div>
               </div>

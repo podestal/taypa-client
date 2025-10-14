@@ -32,7 +32,7 @@ const ScrollRouter = () => {
   console.log(currentRoute);
 
   const routes = [
-    { path: '/carta', component: CartaMain },
+    // { path: '/carta', component: CartaMain },
     { path: '/burger', component: Burger },
     { path: '/chicken', component: Chicken },
     { path: '/salchipapas', component: Salchipapas },
@@ -184,53 +184,9 @@ const ScrollRouter = () => {
     <NavigationContext.Provider value={{ navigateToRoute, currentIndex }}>
       <div 
         ref={containerRef}
-        className="w-full h-screen"
-        style={{ 
-          position: 'relative',
-          height: '100vh',
-          width: '100vw',
-          touchAction: 'pan-y' // Allow vertical scrolling
-        }}
+        className="fixed top-0 left-0 w-screen h-screen bg-red-500"
       >
         <CurrentComponent />
-        
-        {/* Scroll indicators */}
-        <div className="fixed right-4 top-1/2 transform -translate-y-1/2 z-50 space-y-2 pointer-events-none">
-          {routes.map((route, index) => (
-            <div
-              key={route.path}
-              className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                index === currentIndex 
-                  ? 'bg-white scale-125' 
-                  : 'bg-white/30'
-              }`}
-            />
-          ))}
-        </div>
-        
-        {/* Mobile swipe hint */}
-        <div className="md:hidden fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50 pointer-events-none">
-          <div className="bg-black/20 backdrop-blur-sm text-white px-3 py-1 rounded-full text-xs">
-            Swipe ↑↓
-          </div>
-        </div>
-        
-        {/* Scroll hint - only show on desktop */}
-        {currentIndex < routes.length - 1 && (
-          <div className="hidden md:block fixed bottom-8 left-1/2 transform -translate-x-1/2 z-50 animate-bounce pointer-events-none">
-            <div className="bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm">
-              Scroll down ↓
-            </div>
-          </div>
-        )}
-        
-        {currentIndex > 0 && (
-          <div className="hidden md:block fixed top-8 left-1/2 transform -translate-x-1/2 z-50 animate-bounce pointer-events-none">
-            <div className="bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm">
-              Scroll up ↑
-            </div>
-          </div>
-        )}
       </div>
     </NavigationContext.Provider>
   );

@@ -1,8 +1,8 @@
-import CartaMain from "../../components/landing/carta/CartaMain"
+// import CartaMain from "../../components/landing/carta/CartaMain"
 
 const CartaPage = () => {
   return (
-    <CartaMain />
+    <p>CartaPage</p>
   )
 }
 

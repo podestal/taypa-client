@@ -181,7 +181,7 @@ const Burger = () => {
   const selectedOption = burgerTypes.find(option => option.id === selectedType);
 
   return (
-    <div ref={containerRef} className="h-screen bg-gradient-to-br from-red-400 via-red-500 to-red-600 flex items-center justify-center p-2 sm:p-4 md:p-6 lg:p-8 overflow-hidden">
+    <div ref={containerRef} className="h-screen pt-10 bg-gradient-to-br from-red-400 via-red-500 to-red-600 flex items-center justify-center p-2 sm:p-4 md:p-6 lg:p-8 overflow-hidden">
       <div className="max-w-7xl mx-auto w-full h-full flex flex-col">
         <button 
           onClick={handleBackClick}
@@ -196,7 +196,7 @@ const Burger = () => {
           </h1>
         </div>
 
-        <div className="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-2 sm:gap-4 md:gap-6 lg:gap-8 items-start">
+        <div className="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-2 sm:gap-4 md:gap-6 lg:gap-8 items-start h-full">
           {/* Image Section - Top on mobile, Left on desktop */}
           <div className="flex flex-col items-center order-1 lg:order-1">
             <div className="relative w-full max-w-xs sm:max-w-sm md:max-w-md">
