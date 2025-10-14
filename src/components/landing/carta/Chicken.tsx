@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import clasic from '../../../assets/imgs/landing/burger-clasic.png'
-import royal from '../../../assets/imgs/landing/burger-royal.png'
 import personal from '../../../assets/imgs/landing/chicken-three.png'
 import { useNavigation } from '../../ScrollRouter';
 
