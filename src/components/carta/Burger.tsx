@@ -36,7 +36,10 @@ const burgerTypes = [
 const Burger = () => {
 
   return (
-    <ItemMain items={burgerTypes} />
+    <ItemMain 
+        items={burgerTypes} 
+        defaultSelected="clasica" 
+    />
   )
 }
 

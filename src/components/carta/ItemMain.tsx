@@ -12,13 +12,14 @@ interface SingleItem {
 
 interface Props {
     items: SingleItem[];
+    defaultSelected: string;
 }
 
-const ItemMain = ({ items }: Props) => {
+const ItemMain = ({ items, defaultSelected }: Props) => {
 
     const optionsRef = useRef<HTMLDivElement>(null);
     const imageRef = useRef<HTMLImageElement>(null);
-    const [selectedType, setSelectedType] = useState<string>('clasica');
+    const [selectedType, setSelectedType] = useState<string>(defaultSelected);
     const selectedOption = items.find(option => option.id === selectedType);
 
     const handlePrevious = () => {
