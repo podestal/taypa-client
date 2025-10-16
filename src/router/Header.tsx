@@ -2,7 +2,7 @@
 
 import { NavLink } from "react-router-dom"
 import { useEffect, useRef, useState } from "react"
-import { ChevronLeft, ChevronRight } from "lucide-react"
+import { ChevronLeft, ChevronRight, Handbag, UserRound } from "lucide-react"
 
 const links = [
   {
@@ -93,13 +93,19 @@ const Header = () => {
   };
 
   return (
-    <div className="flex items-center gap-2 px-2 py-1 bg-opacity-10 backdrop-blur-sm z-50 h-10 w-full max-w-full overflow-hidden">
-      <p className="text-2xl font-bold flex-shrink-0">LoGo</p>
+    <div className="flex flex-col justify-center items-center gap-2 px-4 py-1 bg-opacity-10 backdrop-blur-sm z-50 h-20 w-full max-w-full overflow-hidden">
+      <div className="grid grid-cols-6 gap-2 w-full">
+        <p className="text-2xl font-bold text-left flex-shrink-0 col-span-4">Logo</p>
+        <div className="flex items-center justify-between gap-2 col-span-2">
+          <UserRound />
+          <Handbag />
+        </div>
+      </div>
       
-      <div className="relative flex items-center flex-1 h-full min-w-0">
+      <div className="relative flex items-center w-full h-8 min-w-0">
         <ul 
           ref={scrollContainerRef}
-          className="flex gap-1 text-xs overflow-x-auto w-full h-full items-center scrollbar-hide scroll-smooth px-2"
+          className="flex gap-1 text-xs overflow-x-auto w-full h-full items-center scrollbar-hide scroll-smooth"
         >
           {links.map((link) => (
             <li 
@@ -109,10 +115,10 @@ const Header = () => {
               <NavLink 
                 to={link.to}
                 className={({ isActive }) => 
-                  `px-2 py-1 rounded transition-all duration-400 ${
+                  `py-1 rounded transition-all duration-400 ${
                     isActive 
-                      ? 'bg-red-600 text-white' 
-                      : 'hover:bg-red-100 hover:text-red-600'
+                      ? 'bg-red-600 text-white px-2' 
+                      : 'hover:bg-red-100 hover:text-red-600 mr-2'
                   }`
                 }
               >
