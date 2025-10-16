@@ -41,7 +41,7 @@ const ItemMain = ({ items, defaultSelected }: Props) => {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
-        <div className="flex flex-col items-center order-1 lg:order-1">
+        <div className="flex flex-col items-center order-1 lg:order-1 mt-4">
             <AnimatePresence mode="wait">
               <motion.div
                 key={selectedType}
@@ -52,7 +52,7 @@ const ItemMain = ({ items, defaultSelected }: Props) => {
                 className="w-full"
               >
                 {/* Title and Price */}
-                <div className="mt-2 sm:mt-4 md:mt-6 text-center max-w-xs sm:max-w-sm md:max-w-md mx-auto">
+                <div className="mt-2 text-center max-w-xs sm:max-w-sm md:max-w-md mx-auto">
                   <motion.h3 
                     className="text-5xl sm:text-base md:text-lg font-bold mb-1"
                     initial={{ opacity: 0, x: -20 }}
@@ -62,7 +62,7 @@ const ItemMain = ({ items, defaultSelected }: Props) => {
                     {selectedOption?.name}
                   </motion.h3>
                   <motion.p 
-                    className="text-md text-center sm:text-sm md:text-base leading-relaxed my-4 font-bold"
+                    className="text-md text-center sm:text-sm md:text-base leading-relaxed mt-2 font-bold"
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.15, duration: 0.3 }}
@@ -89,7 +89,7 @@ const ItemMain = ({ items, defaultSelected }: Props) => {
                   {/* Glow effect */}
                   <div className="absolute "></div>
                   <motion.p 
-                    className="text-xs h-20 text-center sm:text-sm md:text-base leading-relaxed"
+                    className="text-xs h-20 text-center sm:text-sm md:text-base leading-relaxed w-[70%] mx-auto"
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.3, duration: 0.3 }}
@@ -102,7 +102,7 @@ const ItemMain = ({ items, defaultSelected }: Props) => {
 
             {/* Navigation Arrows */}
             <motion.div 
-              className="flex justify-center items-center gap-12 mt-6"
+              className="flex justify-center items-center gap-12 mt-2"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.4 }}
