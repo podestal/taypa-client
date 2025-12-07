@@ -4,18 +4,14 @@ FROM node:20-alpine
 # Set working directory
 WORKDIR /app
 
-# Copy package files
+# Copy package files first (for better caching)
 COPY app/package*.json ./
 
 # Install dependencies
-RUN npm ci
+RUN npm install
 
-# Copy application source
-COPY app/ .
-
-# Expose Vite dev server port (default 5173)
+# Expose default dev port
 EXPOSE 5173
 
-# Start the development server
-CMD ["bash"]
-
+# Default command: interactive shell
+CMD ["sh"]

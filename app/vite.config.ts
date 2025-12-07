@@ -8,4 +8,9 @@ export default defineConfig({
   // optimizeDeps: {
   //   include: ['@fontsource/limelight']
   // }
+  server: {
+    host: '0.0.0.0', // Listen on all network interfaces
+    port: 5173,
+    strictPort: true,
+  },
 })

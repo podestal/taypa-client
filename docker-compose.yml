@@ -1,27 +1,39 @@
-version: '3.8'
+# services:
+#   taypa-client:
+#     build:
+#       context: .
+#       dockerfile: Dockerfile
+#     container_name: taypa-client
+#     ports:
+#       - "5173:5173"
+#     volumes:
+#       - ./app:/app
+#     # volumes:
+#     #   # Mount source code for hot reload (optional - remove if you want isolated container)
+#     #   - ./app/src:/app/src
+#     #   - ./app/public:/app/public
+#     #   - ./app/index.html:/app/index.html
+#     #   - ./app/vite.config.ts:/app/vite.config.ts
+#     #   - ./app/tailwind.config.js:/app/tailwind.config.js
+#     #   - ./app/tsconfig.json:/app/tsconfig.json
+#     #   # Exclude node_modules to use container's dependencies
+#     #   - /app/node_modules
+#     environment:
+#       - NODE_ENV=development
+#     stdin_open: true
+#     tty: true
+#     # restart: unless-stopped
 
 services:
-  taypa-client:
-    build:
-      context: .
-      dockerfile: Dockerfile
+  npm:
+    build: .
     container_name: taypa-client
-    ports:
-      - "5173:5173"
+    working_dir: /app
     volumes:
       - ./app:/app
-    # volumes:
-    #   # Mount source code for hot reload (optional - remove if you want isolated container)
-    #   - ./app/src:/app/src
-    #   - ./app/public:/app/public
-    #   - ./app/index.html:/app/index.html
-    #   - ./app/vite.config.ts:/app/vite.config.ts
-    #   - ./app/tailwind.config.js:/app/tailwind.config.js
-    #   - ./app/tsconfig.json:/app/tsconfig.json
-    #   # Exclude node_modules to use container's dependencies
-    #   - /app/node_modules
-    environment:
-      - NODE_ENV=development
-    stdin_open: true
+      # Use container's node_modules (don't overwrite with host)
+      - /app/node_modules
+    ports:
+      - "5173:5173"
     tty: true
-
+    stdin_open: true
