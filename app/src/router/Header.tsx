@@ -3,6 +3,7 @@
 import { NavLink } from "react-router-dom"
 import { useEffect, useRef, useState } from "react"
 import { ChevronLeft, ChevronRight, Handbag, UserRound } from "lucide-react"
+import logo from '../assets/taypa-logo-web.ico'
 
 const links = [
   {
@@ -93,9 +94,9 @@ const Header = () => {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center gap-2 px-4 py-1 bg-opacity-10 backdrop-blur-sm z-50 h-20 w-full max-w-full overflow-hidden">
+    <div className="flex flex-col justify-center items-center gap-2 px-4 py-1 bg-opacity-10 backdrop-blur-sm z-50 h-30 w-full max-w-full overflow-hidden">
       <div className="grid grid-cols-6 gap-2 w-full">
-        <p className="text-2xl font-bold text-left flex-shrink-0 col-span-4">Logo</p>
+        <p className="text-2xl font-bold text-left flex-shrink-0 col-span-4"><img src={logo} alt="Logo" className="w-20 h-18" /></p>
         <div className="flex items-center justify-between gap-2 col-span-2">
           <UserRound />
           <Handbag />
