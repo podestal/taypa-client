@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom"
 import { useEffect, useRef, useState } from "react"
 import { ChevronLeft, ChevronRight, Handbag, UserRound } from "lucide-react"
 import logo from '../assets/taypa-logo-web.ico'
+import CategoryMain from "../components/category/CategoryMain"
 
 const links = [
   {
@@ -44,6 +45,8 @@ const Header = () => {
   const scrollContainerRef = useRef<HTMLUListElement>(null);
   const [showLeftIndicator, setShowLeftIndicator] = useState(false);
   const [showRightIndicator, setShowRightIndicator] = useState(true);
+
+
 
   const checkScroll = () => {
     if (!scrollContainerRef.current) return;
@@ -104,6 +107,7 @@ const Header = () => {
       </div>
       
       <div className="relative flex items-center w-full h-8 min-w-0">
+        <CategoryMain />
         <ul 
           ref={scrollContainerRef}
           className="flex gap-1 text-xs overflow-x-auto w-full h-full items-center scrollbar-hide scroll-smooth"
