@@ -1,18 +1,19 @@
 import useGetCategoriesForMenu from "../../hooks/category/useGetCategoriesForMenu"
+import CategoryNavigator from "./CategoryNavigator"
 
-const CategoryMain = () => {
+interface Props {
+    scrollContainerRef: React.RefObject<HTMLUListElement>
+}
 
-    const { data: categories, isLoading, error } = useGetCategoriesForMenu()
+const CategoryMain = ({ scrollContainerRef }: Props) => {
 
-    if (isLoading) return <div>Loading...</div>
-    if (error) return <div>Error: {error.message}</div>
+    const { data: categories, isLoading, error, isSuccess } = useGetCategoriesForMenu()
 
-    return (
-        <div>
-            <>{console.log('categories', categories)}</>
+    if (isLoading) return <div className="text-center text-xs font-semibold text-gray-500 animate-pulse">Un momento...</div>
+    if (error) return <div className="text-center text-xs font-semibold text-red-500">Error: {error.message}</div>
+    if (isSuccess) return <CategoryNavigator categories={categories} scrollContainerRef={scrollContainerRef} />
 
-        </div>
-    )
+    return null
 }
 
 export default CategoryMain

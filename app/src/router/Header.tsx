@@ -107,8 +107,8 @@ const Header = () => {
       </div>
       
       <div className="relative flex items-center w-full h-8 min-w-0">
-        <CategoryMain />
-        <ul 
+        <CategoryMain scrollContainerRef={scrollContainerRef} />
+        {/* <ul 
           ref={scrollContainerRef}
           className="flex gap-1 text-xs overflow-x-auto w-full h-full items-center scrollbar-hide scroll-smooth"
         >
@@ -131,7 +131,7 @@ const Header = () => {
               </NavLink>
             </li>
           ))}
-        </ul>
+        </ul> */}
 
         {/* Left gradient indicator */}
         {showLeftIndicator && (
