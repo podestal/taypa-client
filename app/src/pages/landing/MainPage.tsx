@@ -1,12 +1,19 @@
 import Header from "../../router/Header"
-import { Outlet } from "react-router-dom"
+import DishMain from "../../components/dish/DishMain"
+import { useState } from "react";
 
 const MainPage = () => {
+
+  const [selectedCategory, setSelectedCategory] = useState(1);
   return (
     <div className="h-screen flex flex-col w-full overflow-x-hidden">
-        <Header />
+      <>{console.log('selectedCategory', selectedCategory)}</>
+        <Header 
+          selectedCategory={selectedCategory}
+          setSelectedCategory={setSelectedCategory}
+        />
         <div className="flex-1 overflow-y-auto">
-          <Outlet />
+          <DishMain selectedCategory={selectedCategory} />
         </div>
     </div>
   )

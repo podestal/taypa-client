@@ -30,28 +30,28 @@ const routes = createBrowserRouter([
         //         element: <ScrollRouter />
         //     }
         // ]
-        children: [
-            {
-                path: "burger",
-                element: <Burger />
-            },
-            {
-                path: "chicken",
-                element: <Chicken />
-            },
-            {
-                path: "papas",
-                element: <Papas />
-            },
-            {
-                path: "dessert",
-                element: <Desserts />
-            },
-            {
-                path: "bebidas",
-                element: <Bebidas />
-            }
-        ]
+        // children: [
+        //     {
+        //         path: "burger",
+        //         element: <Burger />
+        //     },
+        //     {
+        //         path: "pollo",
+        //         element: <Chicken />
+        //     },
+        //     {
+        //         path: "salchipapa",
+        //         element: <Papas />
+        //     },
+        //     {
+        //         path: "dessert",
+        //         element: <Desserts />
+        //     },
+        //     {
+        //         path: "bebidas",
+        //         element: <Bebidas />
+        //     }
+        // ]
     }
 ]);
 

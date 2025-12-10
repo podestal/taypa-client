@@ -6,42 +6,47 @@ import { ChevronLeft, ChevronRight, Handbag, UserRound } from "lucide-react"
 import logo from '../assets/taypa-logo-web.ico'
 import CategoryMain from "../components/category/CategoryMain"
 
-const links = [
-  {
-    name: "Las Burgers",
-    to: "/burger"
-  },
-  {
-    name: "Los Pollos",
-    to: "/chicken"
-  },
-  {
-    name: "Las Papas",
-    to: "/papas"
-  },
-  {
-    name: "Los Postres",
-    to: "/dessert"
-  },
-  {
-    name: "Las Bebidas",
-    to: "/bebidas"
-  },
-  {
-    name: "Las Ensaladas",
-    to: "/ensaladas"
-  },
-  {
-    name: "Los Combos",
-    to: "/combos"
-  },
-  {
-    name: "Las Promos",
-    to: "/promos"
-  }
-]
+interface Props {
+  selectedCategory: number;
+  setSelectedCategory: (category: number) => void;
+}
 
-const Header = () => {
+// const links = [
+//   {
+//     name: "Las Burgers",
+//     to: "/burger"
+//   },
+//   {
+//     name: "Los Pollos",
+//     to: "/chicken"
+//   },
+//   {
+//     name: "Las Papas",
+//     to: "/papas"
+//   },
+//   {
+//     name: "Los Postres",
+//     to: "/dessert"
+//   },
+//   {
+//     name: "Las Bebidas",
+//     to: "/bebidas"
+//   },
+//   {
+//     name: "Las Ensaladas",
+//     to: "/ensaladas"
+//   },
+//   {
+//     name: "Los Combos",
+//     to: "/combos"
+//   },
+//   {
+//     name: "Las Promos",
+//     to: "/promos"
+//   }
+// ]
+
+const Header = ({ selectedCategory, setSelectedCategory }: Props) => {
   const scrollContainerRef = useRef<HTMLUListElement>(null);
   const [showLeftIndicator, setShowLeftIndicator] = useState(false);
   const [showRightIndicator, setShowRightIndicator] = useState(true);
@@ -107,63 +112,7 @@ const Header = () => {
       </div>
       
       <div className="relative flex items-center w-full h-8 min-w-0">
-        <CategoryMain scrollContainerRef={scrollContainerRef} />
-        {/* <ul 
-          ref={scrollContainerRef}
-          className="flex gap-1 text-xs overflow-x-auto w-full h-full items-center scrollbar-hide scroll-smooth"
-        >
-          {links.map((link) => (
-            <li 
-              className="whitespace-nowrap text-center font-semibold flex-shrink-0"
-              key={link.name}
-            >
-              <NavLink 
-                to={link.to}
-                className={({ isActive }) => 
-                  `py-1 rounded transition-all duration-400 ${
-                    isActive 
-                      ? 'bg-red-600 text-white px-2' 
-                      : 'hover:bg-red-100 hover:text-red-600 mr-2'
-                  }`
-                }
-              >
-                {link.name}
-              </NavLink>
-            </li>
-          ))}
-        </ul> */}
-
-        {/* Left gradient indicator */}
-        {showLeftIndicator && (
-          <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-white via-white/50 to-transparent pointer-events-none z-30" />
-        )}
-        
-        {/* Left scroll button */}
-        {showLeftIndicator && (
-          <button
-            onClick={() => scroll('left')}
-            className="absolute left-2 top-1/2 -translate-y-1/2 z-40 bg-red-600 hover:bg-red-700 text-white p-1.5 rounded-full shadow-lg transition-all"
-            aria-label="Scroll left"
-          >
-            <ChevronLeft size={18} />
-          </button>
-        )}
-
-        {/* Right gradient indicator */}
-        {showRightIndicator && (
-          <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-white via-white/50 to-transparent pointer-events-none z-30" />
-        )}
-
-        {/* Right scroll button */}
-        {showRightIndicator && (
-          <button
-            onClick={() => scroll('right')}
-            className="absolute right-2 top-1/2 -translate-y-1/2 z-40 bg-red-600 hover:bg-red-700 text-white p-1.5 rounded-full shadow-lg transition-all animate-pulse"
-            aria-label="Scroll right"
-          >
-            <ChevronRight size={18} />
-          </button>
-        )}
+        <CategoryMain selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} scrollContainerRef={scrollContainerRef} />
       </div>
     </div>
   )
