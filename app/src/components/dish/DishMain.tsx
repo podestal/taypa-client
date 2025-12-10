@@ -1,4 +1,6 @@
 import useGetDishesByCategory from "../../hooks/dish/useGetDishesByCategory"
+import type { Dish } from "../../services/api/dishService"
+import DishCard from "./DishCard"
 
 
 interface Props {
@@ -14,7 +16,10 @@ const DishMain = ({ selectedCategory }: Props) => {
 
   return (
     <div>
-        <>{console.log('dishes', dishes)}</>
+        {/* <>{console.log('dishes', dishes)}</> */}
+        {dishes.map((dish: Dish) => (
+            <DishCard key={dish.id} dish={dish} />
+        ))}
     </div>
   )
 }
