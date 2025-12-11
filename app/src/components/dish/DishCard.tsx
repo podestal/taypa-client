@@ -5,14 +5,15 @@ import type { Dish } from '../../services/api/dishService';
 
 interface Props {
     dish: Dish
+    dishes: Dish[]
+    currentIndex: number
+    onPrevious: () => void
+    onNext: () => void
 }
 
-const DishCard = ({ dish }: Props) => {
+const DishCard = ({ dish, dishes, currentIndex, onPrevious, onNext }: Props) => {
 
     const optionsRef = useRef<HTMLDivElement>(null);
-
-    const handlePrevious = () => {}
-    const handleNext = () => {}
 
   return (
     <motion.div 
@@ -88,36 +89,36 @@ const DishCard = ({ dish }: Props) => {
               transition={{ delay: 0.4, duration: 0.4 }}
             >
               <motion.button
-                onClick={handlePrevious}
+                onClick={onPrevious}
                 className="text-black p-3 rounded-full transition-all duration-300 shadow-lg"
-                aria-label="Previous burger"
+                aria-label="Previous dish"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
               >
                 <ChevronLeft size={24} />
               </motion.button>
               
-              {/* <div className="flex gap-2">
-                {items.map((burger) => (
+              <div className="flex gap-2">
+                {dishes.map((d, index) => (
                   <motion.div
-                    key={burger.id}
+                    key={d.id}
                     className={`h-2 rounded-full ${
-                      burger.id === selectedType 
+                      index === currentIndex 
                         ? 'bg-red-600' 
                         : 'bg-gray-300'
                     }`}
                     animate={{
-                      width: burger.id === selectedType ? '16px' : '8px'
+                      width: index === currentIndex ? '16px' : '8px'
                     }}
                     transition={{ duration: 0.3 }}
                   />
                 ))}
-              </div> */}
+              </div>
 
               <motion.button
-                onClick={handleNext}
+                onClick={onNext}
                 className="text-black p-3 rounded-full transition-all duration-300 shadow-lg"
-                aria-label="Next burger"
+                aria-label="Next dish"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
               >
