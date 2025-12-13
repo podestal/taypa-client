@@ -2,6 +2,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useRef } from 'react';
 import type { Dish } from '../../services/api/dishService';
+import burgerClasic from '../../assets/imgs/landing/burger-clasic.png';
 
 interface Props {
     dish: Dish
@@ -61,7 +62,7 @@ const DishCard = ({ dish, dishes, currentIndex, onPrevious, onNext }: Props) => 
                 >
                   <motion.img 
                     // ref={imageRef}
-                    src={dish.image || ''} 
+                    src={dish.image || burgerClasic} 
                     alt="hamburguesa" 
                     className="w-full drop-shadow-2xl"
                     whileHover={{ scale: 1.05 }}
